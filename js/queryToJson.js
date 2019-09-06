@@ -18,8 +18,8 @@ function queryToJson(link){
 		return (a==':' || a==',')? a: a = `\"${a}\"`;
 	})
 	link = decodeURIComponent(`{${link.join('').replace(/\+/g, ' ')}}`);
-	console.log(link);
-	console.log(JSON.parse(link));
+	// console.log(link);
+	// console.log(JSON.parse(link));
 	try{
 		return JSON.parse(link);
 	}catch(errmsg){
