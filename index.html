@@ -37,34 +37,8 @@
 			}else{
 				document.querySelector('#display').innerText = "Parsed url shows here";
 			}
-
 		});
-		function queryToJson(link){
-			if(link){
-				link = link.substring(link.indexOf('?')+1)
-				.replace(/=/g, ' : ')
-				.replace(/&/g, ' , ')
-				.split(' ')
-			}else{
-				link = location.search.substring(1)
-				.replace(/=/g, ' : ')
-				.replace(/&/g, ' , ')
-				.split(' ');
-			}
-
-			link=link.map((a)=>{
-				return (a==':' || a==',')? a: a = `\"${a}\"`;
-			})
-			link = decodeURIComponent(`{${link.join('')}}`);
-			console.log(link);
-			console.log(JSON.parse(link));
-			try{
-				return JSON.parse(link);
-			}catch(errmsg){
-				console.log("error", errmsg);
-				return "error in url query string"
-			}
-		}
 	</script>
+	<script type="text/javascript" src="js/queryToJson.js"></script>
 </body>
 </html>
