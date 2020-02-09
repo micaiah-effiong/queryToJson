@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Convert query string to JSON</title>
+	<style type="text/css">
+		input{
+		    height: 40px;
+		    font-size: 18px;
+		    border-radius: 5px;
+		    border-color: #757575;
+		}
+
+		code{
+			padding: 7px;
+		    margin: 7px;
+		    display: block;
+		    font-size: 15px;
+			line-height: 23px;
+			font-style: oblique;
+		}
+	</style>
+</head>
+<body>
+	<code id="display">Parsed url shows here</code>
+	<input type="" id="input">
+
+	<script type="text/javascript">
+		let inp= document.getElementById('input')
+		inp.addEventListener('input', ()=>{
+			// console.log(inp.value.length)
+			if(!(inp.value.length<=0)){
+				document.querySelector('#display').innerText = JSON.stringify(queryToJson(inp.value))
+				.replace(/,/g, ",\n\t\t")
+				.replace(/{/g, "{\n")
+				.replace(/}/g, "\n}")
+				// console.log(inp.value)
+			}else{
+				document.querySelector('#display').innerText = "Parsed url shows here";
+			}
+		});
+	</script>
+	<script type="text/javascript" src="../queryToJson.js"></script>
+</body>
+</html>
