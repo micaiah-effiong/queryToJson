@@ -24,7 +24,7 @@ function queryToJson(query, option=true){
 		: query;
 	}
 
-	return parseObjFromNestArray(_string.split('&'));
+	return createObjFromPairedArrayValues(_string.split('&'));
 }
 
 /*
@@ -32,7 +32,7 @@ function queryToJson(query, option=true){
  * return {Object} obj {foo: bar}
  *
 */
-function parseObjFromNestArray(_arr){
+function createObjFromPairedArrayValues(_arr){
 	let obj = Object.create(null);
 	_arr.forEach(function(elt){
 		let pair = elt.split('=');
