@@ -18,6 +18,7 @@ function queryToJson(query){
 	let queryArray = _string.split('&');
 	queryArray.forEach(function(elt){
 		elt = elt.split('=');
+		elt[1] = decodeURIComponent(elt[1]).replace(/\+/g, " ");
 		if (obj[elt[0]] && typeof obj[elt[0]] == 'string') {
 			let placeholder = obj[elt[0]];
 			obj[elt[0]] = new Array();

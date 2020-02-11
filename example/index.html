@@ -4,17 +4,17 @@
 	<title>Convert query string to JSON</title>
 	<style type="text/css">
 		input{
-		    height: 40px;
-		    font-size: 18px;
-		    border-radius: 5px;
-		    border-color: #757575;
+	    height: 40px;
+	    font-size: 18px;
+	    border-radius: 5px;
+	    border-color: #757575;
 		}
 
 		code{
 			padding: 7px;
-		    margin: 7px;
-		    display: block;
-		    font-size: 15px;
+	    margin: 7px;
+	    display: block;
+	    font-size: 15px;
 			line-height: 23px;
 			font-style: oblique;
 		}
@@ -30,7 +30,7 @@
 			// console.log(inp.value.length)
 			if(!(inp.value.length<=0)){
 				document.querySelector('#display').innerText = JSON.stringify(queryToJson(inp.value))
-				.replace(/,/g, ",\n\t\t")
+				.replace(/,/g, ",\n\t\t\t")
 				.replace(/{/g, "{\n")
 				.replace(/}/g, "\n}")
 				// console.log(inp.value)
