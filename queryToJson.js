@@ -1,32 +1,50 @@
 /*
  * @Author
  * Micaiah Effiong
- *
+ * https://github.com/Artalia
+ * 
 */
 
 /*
  * @param {String} query 
+ * @param {Boolean} option specifies if ${query} should be a valid URL 
  * return Object
  *
 */
-function queryToJson(query){
+function queryToJson(query, option=true){
 	if(!query) throw Error('query is not defined');
-	let obj = Object.create(null);
-	let _string = (query.startsWith('?'))
+	let _string 
+
+	try{
+		_string = new URL(query).search.substring(1)
+	}catch(e){
+		if (option == true) throw Error('query is not a valid URL');
+		_string = (query.substring(query.indexOf('?')+1))
 		? query.substring(1)
 		: query;
-	let queryArray = _string.split('&');
-	queryArray.forEach(function(elt){
-		elt = elt.split('=');
-		elt[1] = decodeURIComponent(elt[1]).replace(/\+/g, " ");
-		if (obj[elt[0]] && typeof obj[elt[0]] == 'string') {
-			let placeholder = obj[elt[0]];
-			obj[elt[0]] = new Array();
-			obj[elt[0]].push(placeholder, elt[1]);
-		}else	if (obj[elt[0]] && obj[elt[0]] instanceof Array == true) {
-			obj[elt[0]].push(elt[1]);
+	}
+
+	return parseObjFromNestArray(_string.split('&'));
+}
+
+/*
+ * @param {Array} _arr ["foo=bar"]
+ * return {Object} obj {foo: bar}
+ *
+*/
+function parseObjFromNestArray(_arr){
+	let obj = Object.create(null);
+	_arr.forEach(function(elt){
+		let pair = elt.split('=');
+		pair[1] = decodeURIComponent(pair[1]).replace(/\+/g, " ");
+		if (obj[pair[0]] && typeof obj[pair[0]] == 'string') {
+			let placeholder = obj[pair[0]];
+			obj[pair[0]] = new Array();
+			obj[pair[0]].push(placeholder, pair[1]);
+		}else	if (obj[pair[0]] && obj[pair[0]] instanceof Array == true) {
+			obj[pair[0]].push(pair[1]);
 		}else{
-			obj[elt[0]] = elt[1];
+			obj[pair[0]] = pair[1];
 		}
 	});
 	return obj;
