@@ -1,24 +1,37 @@
 /*
  * @Author
  * Micaiah Effiong
- * https://github.com/Artalia
+ * https://github.com/micaiah-effiong/queryToJson
  * 
 */
 
 /*
- * @param {String} query 
- * @param {Boolean} option specifies if ${query} should be a valid URL 
- * return Object
- *
+	* @param {String} query 
+	* @param {Boolean} option specifies if ${query} should be a valid URL 
+	*
+	* return Object
+	*
+	* example: queryToJson('query=name', true)
+	* // this is not valid
+	* Invalid URL
+	*
+	* example: queryToJson('query=name', false)
+	* // this is valid
+	* {'query': 'name'}
+	*
 */
 function queryToJson(query, option=true){
-	if(!query) throw Error('query is not defined');
+	if(!query){
+		throw TypeError('1 argument required, but only 0 present.');
+	}
 	let _string 
 
 	try{
 		_string = new URL(query).search.substring(1)
-	}catch(e){
-		if (option == true) throw Error('query is not a valid URL');
+	}catch(err){
+		if (option == true){
+			throw err;
+		}
 		_string = (query.substring(query.indexOf('?')+1))
 		? query.substring(1)
 		: query;
