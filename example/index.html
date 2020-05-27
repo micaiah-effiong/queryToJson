@@ -27,13 +27,11 @@
 	<script type="text/javascript">
 		let inp= document.getElementById('input')
 		inp.addEventListener('input', ()=>{
-			// console.log(inp.value.length)
 			if(!(inp.value.length<=0)){
 				document.querySelector('#display').innerText = JSON.stringify(queryToJson(inp.value))
 				.replace(/,/g, ",\n\t\t\t")
 				.replace(/{/g, "{\n")
 				.replace(/}/g, "\n}")
-				// console.log(inp.value)
 			}else{
 				document.querySelector('#display').innerText = "Parsed url shows here";
 			}
